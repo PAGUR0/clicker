@@ -1,21 +1,48 @@
 package com.example.clicker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "StartActivity";
+
+    private static final String KEY_COUNTER = "COUNTER";
+    private Integer counter = 0;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(savedInstanceState == null){
+            Toast.makeText(this, "Здравствуй китайский рабочий", Toast.LENGTH_LONG).show();
+        }
     }
 
-    private Integer counter = 0;
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_COUNTER, counter);
+        Log.d(TAG, "onSaveInstanceState");
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        counter = savedInstanceState.getInt(KEY_COUNTER);
+        TextView counterView = findViewById(R.id.txt_counter);
+        counterView.setText("+" + counter.toString());
+        Log.d(TAG, "onRestoreInstanceState");
+    }
 
     @SuppressLint("SetTextI18n")
     public void OnClickBtnAddSocialCredit(View view){
