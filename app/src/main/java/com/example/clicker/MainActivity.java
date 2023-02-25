@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_COUNTER, counter);
-        Log.d(TAG, "onSaveInstanceState");
     }
 
     @SuppressLint("SetTextI18n")
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         counter = savedInstanceState.getInt(KEY_COUNTER);
         TextView counterView = findViewById(R.id.txt_counter);
         counterView.setText("+" + counter.toString());
-        Log.d(TAG, "onRestoreInstanceState");
     }
 
     @SuppressLint("SetTextI18n")
